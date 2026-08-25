@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân Công Nhiệm Vụ - Quản lý Mạng Xã Hội Nội Bộ</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f6f9; line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #0056b3; text-align: center; }
+        .card { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 6px; background-color: #fff; }
+        .role { color: #d9534f; font-weight: bold; font-size: 1.1em; }
+        .leader { border-left: 5px solid #0275d8; }
+        .member { border-left: 5px solid #5cb85c; }
+        ul { margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>ĐỀ TÀI: QUẢN LÝ MẠNG XÃ HỘI NỘI BỘ</h1>
+    <p><strong>Lớp:</strong> ĐH-CNTT1.K24</p>
+    <hr>
+    
+    <h2>Phân Công Nhiệm Vụ Nhóm</h2>
+    <div id="task-list-container"></div>
+</div>
+
+<script>
+    const taskAssignments = [
+        {
+            role: "TRƯỞNG NHÓM / BACKEND & PROJECT LEAD",
+            fullName: "Đào Văn Giang",
+            studentId: "233148201052",
+            isLeader: true,
+            tasks: [
+                "Quản lý chung: Phân công nhiệm vụ, theo dõi tiến độ và tổng hợp báo cáo project.",
+                "Thiết kế Kiến trúc hệ thống & Cơ sở dữ liệu (Database Schema).",
+                "Phát triển các API cốt lõi (RESTful API): Xác thực JWT/OAuth2, Phân quyền RBAC.",
+                "Xây dựng Logic Backend: Đăng bài, Duyệt bài nội bộ, Quản lý phòng ban/nhóm.",
+                "Tích hợp, kiểm thử hệ thống và Triển khai ứng dụng (Deployment)."
+            ]
+        },
+        {
+            role: "THÀNH VIÊN / FRONTEND DEVELOPER",
+            fullName: "Phạm Thu Thuỷ",
+            studentId: "233148201039",
+            isLeader: false,
+            tasks: [
+                "Phân tích Yêu cầu người dùng (URD) & Thiết kế Wireframe UI/UX.",
+                "Xây dựng Giao diện (UI): Newsfeed, Trang cá nhân, Trang quản trị Admin.",
+                "Kết nối Frontend với Backend API: Đăng bài, bình luận, tương tác Like/Share.",
+                "Tối ưu hóa giao diện đa thiết bị (Responsive UI).",
+                "Soạn thảo Tài liệu Hướng dẫn sử dụng hệ thống."
+            ]
+        },
+        {
+            role: "THÀNH VIÊN / FULLSTACK SUPPORT & TESTER",
+            fullName: "Nguyễn Thị Mỹ Huyền",
+            studentId: "233148201041",
+            isLeader: false,
+            tasks: [
+                "Phát triển tính năng phụ: Thông báo nội bộ (Notifications), Tìm kiếm.",
+                "Thiết kế & Thực thi Kịch bản kiểm thử (Test Cases, API Testing trên Postman).",
+                "Kiểm tra bảo mật cơ bản & Kiểm soát quyền riêng tư dữ liệu.",
+                "Theo dõi lỗi (Bug Tracking) và hỗ trợ hoàn thiện UI/API.",
+                "Tổng hợp, biên soạn Báo cáo tổng kết đồ án (Slide + File Word)."
+            ]
+        }
+    ];
+
+    function renderTaskAssignments() {
+        const container = document.getElementById("task-list-container");
+        if (!container) return;
+
+        container.innerHTML = taskAssignments.map(member => `
+            <div class="card ${member.isLeader ? 'leader' : 'member'}">
+                <div class="role">${member.role}</div>
+                <p><strong>Họ tên:</strong> ${member.fullName} | <strong>MSV:</strong> ${member.studentId}</p>
+                <strong>Nhiệm vụ chính:</strong>
+                <ul>
+                    ${member.tasks.map(task => `<li>${task}</li>`).join('')}
+                </ul>
+            </div>
+        `).join('');
+    }
+
+    renderTaskAssignments();
+</script>
+
+</body>
+</html>
