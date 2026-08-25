@@ -1,11 +1,435 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Giới Thiệu Bản Thân - Nguyễn Thị Mỹ Huyền</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            min-height: 100vh;
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* --- PHẦN CARD GIỮ NGUYÊN CODE CŨ --- */
+        .profile-card {
+            background: #ffffff;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #0066eb 0%, #0049b7 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .avatar-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px auto;
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: block;
+        }
+
+        .card-header h1 {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .card-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 25px 20px;
+        }
+
+        .info-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-group:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #555;
+            width: 40%;
+        }
+
+        .value {
+            color: #222;
+            width: 60%;
+            text-align: right;
+        }
+
+        .badge {
+            background-color: #e8f2ff;
+            color: #0066eb;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .card-footer {
+            background-color: #fafafa;
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* --- PHẦN BỔ SUNG: KHU VỰC THÊM - SỬA - XÓA --- */
+        .management-section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #0049b7;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #0066eb;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-control label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .form-control input {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .form-control input:focus {
+            border-color: #0066eb;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 9px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .btn-add { background-color: #0066eb; color: white; }
+        .btn-add:hover { background-color: #0049b7; }
+        .btn-cancel { background-color: #6c757d; color: white; display: none; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f4f7fc;
+            color: #0049b7;
+        }
+
+        .action-btn {
+            padding: 4px 8px;
+            font-size: 11px;
+            margin-right: 3px;
+        }
+
+        .btn-edit { background-color: #ffc107; color: #000; }
+        .btn-delete { background-color: #dc3545; color: white; }
+    </style>
 </head>
 <body>
-    
+
+    <div class="container">
+        
+        <!-- CARD GIỚI THIỆU BẢN THÂN (GIỮ NGUYÊN HÌNH THỨC BAN ĐẦU) -->
+        <div class="profile-card">
+            <div class="card-header">
+                <img id="display-img" src="C:/Users/TenCuaBan/Pictures/anh_canhan.jpg" alt="Nguyễn Thị Mỹ Huyền" class="avatar-img" onerror="this.src='https://via.placeholder.com/120?text=Avatar'">
+                <h1 id="display-name">Nguyễn Thị Mỹ Huyền</h1>
+                <p>Sinh viên Khoa Công nghệ Thông tin</p>
+            </div>
+
+            <div class="card-body">
+                <div class="info-group">
+                    <span class="label">Mã sinh viên:</span>
+                    <span class="value"><span class="badge" id="display-msv">233148201041</span></span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Ngày sinh:</span>
+                    <span class="value" id="display-dob">31/07/2005</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Lớp:</span>
+                    <span class="value" id="display-class">CNTT1.K24</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Khóa:</span>
+                    <span class="value" id="display-course">K24</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Khoa:</span>
+                    <span class="value">Công nghệ Thông tin</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Trường:</span>
+                    <span class="value">Đại học Hải Phòng</span>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                Profile Card &bull; Trường Đại học Hải Phòng
+            </div>
+        </div>
+
+        <!-- BẢNG CÔNG CỤ THÊM - SỬA - XÓA THÔNG TIN -->
+        <div class="management-section">
+            <h2 class="section-title" id="form-header">Quản Lý Thông Tin</h2>
+            
+            <form id="student-form">
+                <input type="hidden" id="edit-index">
+                <div class="form-grid">
+                    <div class="form-control">
+                        <label>Mã Sinh Viên</label>
+                        <input type="text" id="input-msv" required>
+                    </div>
+                    <div class="form-control">
+                        <label>Họ và Tên</label>
+                        <input type="text" id="input-name" required>
+                    </div>
+                    <div class="form-control">
+                        <label>Ngày Sinh</label>
+                        <input type="text" id="input-dob">
+                    </div>
+                    <div class="form-control">
+                        <label>Lớp</label>
+                        <input type="text" id="input-class">
+                    </div>
+                    <div class="form-control full-width">
+                        <label>Link ảnh (Đường dẫn máy tính/Web)</label>
+                        <input type="text" id="input-img">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn-add" id="btn-submit">Thêm Sinh Viên</button>
+                    <button type="button" class="btn-cancel" id="btn-cancel" onclick="resetForm()">Hủy</button>
+                </div>
+            </form>
+
+            <h2 class="section-title">Danh Sách Sinh Viên</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã SV</th>
+                            <th>Họ và Tên</th>
+                            <th>Lớp</th>
+                            <th>Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-list">
+                        <!-- Dữ liệu render ra đây -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Dữ liệu ban đầu mặc định của Nguyễn Thị Mỹ Huyền
+        const defaultData = [
+            {
+                msv: "233148201041",
+                name: "Nguyễn Thị Mỹ Huyền",
+                dob: "31/07/2005",
+                className: "CNTT1.K24",
+                course: "K24",
+                img: "C:/Users/admin/Downloads/Ảnh của Huyền.jpg"
+            }
+        ];
+
+        let students = JSON.parse(localStorage.getItem("students_list")) || defaultData;
+
+        // Lưu vào LocalStorage
+        function saveData() {
+            localStorage.setItem("students_list", JSON.stringify(students));
+        }
+
+        // Cập nhật thông tin lên Card Giới Thiệu Bản Thân chính (Mặc định hiển thị sinh viên đầu tiên)
+        function updateMainCard(student) {
+            if (!student) return;
+            document.getElementById("display-name").innerText = student.name;
+            document.getElementById("display-msv").innerText = student.msv;
+            document.getElementById("display-dob").innerText = student.dob;
+            document.getElementById("display-class").innerText = student.className;
+            document.getElementById("display-course").innerText = student.course || "K24";
+            document.getElementById("display-img").src = student.img;
+        }
+
+        // Hiển thị danh sách ra Bảng
+        function renderTable() {
+            const tbody = document.getElementById("student-list");
+            tbody.innerHTML = "";
+
+            students.forEach((item, index) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td><b>${item.msv}</b></td>
+                    <td>${item.name}</td>
+                    <td>${item.className}</td>
+                    <td>
+                        <button class="action-btn btn-edit" onclick="editStudent(${index})">Sửa</button>
+                        <button class="action-btn btn-delete" onclick="deleteStudent(${index})">Xóa</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Cập nhật card chính với sinh viên đầu tiên trong danh sách
+            if (students.length > 0) {
+                updateMainCard(students[0]);
+            }
+        }
+
+        // Xử lý Thêm / Sửa
+        document.getElementById("student-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const editIndex = document.getElementById("edit-index").value;
+            const newStudent = {
+                msv: document.getElementById("input-msv").value,
+                name: document.getElementById("input-name").value,
+                dob: document.getElementById("input-dob").value,
+                className: document.getElementById("input-class").value,
+                course: "K24",
+                img: document.getElementById("input-img").value
+            };
+
+            if (editIndex === "") {
+                students.push(newStudent);
+            } else {
+                students[editIndex] = newStudent;
+            }
+
+            saveData();
+            renderTable();
+            resetForm();
+        });
+
+        // Sửa sinh viên
+        function editStudent(index) {
+            const st = students[index];
+            document.getElementById("input-msv").value = st.msv;
+            document.getElementById("input-name").value = st.name;
+            document.getElementById("input-dob").value = st.dob;
+            document.getElementById("input-class").value = st.className;
+            document.getElementById("input-img").value = st.img;
+
+            document.getElementById("edit-index").value = index;
+            document.getElementById("form-header").innerText = "Chỉnh Sửa Thông Tin";
+            document.getElementById("btn-submit").innerText = "Lưu Cập Nhật";
+            document.getElementById("btn-cancel").style.display = "inline-block";
+        }
+
+        // Xóa sinh viên
+        function deleteStudent(index) {
+            if (confirm("Bạn có chắc muốn xóa sinh viên này?")) {
+                students.splice(index, 1);
+                saveData();
+                renderTable();
+            }
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById("student-form").reset();
+            document.getElementById("edit-index").value = "";
+            document.getElementById("form-header").innerText = "Quản Lý Thông Tin";
+            document.getElementById("btn-submit").innerText = "Thêm Sinh Viên";
+            document.getElementById("btn-cancel").style.display = "none";
+        }
+
+        // Khởi chạy khi load trang
+        renderTable();
+    </script>
 </body>
 </html>
